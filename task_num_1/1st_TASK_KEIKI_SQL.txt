@@ -1,0 +1,64 @@
+-----1. Кількість реєстрацій нових користувачів по днях та групам країн-----
+SELECT 
+	DATE(date_reg) AS reg_day,
+	countries.group, 
+	COUNT(users.id) AS num_of_users
+FROM users
+INNER JOIN countries
+	ON users.id_country = countries.id
+GROUP BY reg_day, countries.group
+ORDER BY reg_day, num_of_users;
+
+
+-----2. CTR (click-through rate) різних типів листів по днях-----
+SELECT 
+	DATE(es.date_sent) AS send_day,
+	es.id_type AS email_id_type,
+	ROUND(
+		(
+			(COUNT(ec.id) * 1.0) / (COUNT(es.id) * 1.0)
+		) * 100, 2
+	) AS ctr_percentage
+FROM emails_sent AS es
+LEFT JOIN emails_clicks AS ec
+	ON ec.id_email = es.id
+GROUP BY send_day, email_id_type
+ORDER BY send_day, email_id_type;
+
+
+-----3. % листів, на які клікали користувачі протягом 10 хвилин після відправки, по різних типах листів за останні 7 діб-----
+SELECT 
+    es.id_type AS email_type,
+    ROUND(
+        (COUNT(DISTINCT ec.id) * 1.0 / NULLIF(COUNT(DISTINCT es.id), 0)) * 100, 
+        2
+    ) AS ten_min_ctr_percentage
+FROM emails_sent es
+LEFT JOIN emails_clicks ec
+    ON ec.id_email = es.id 
+    AND ec.date_click <= es.date_sent + INTERVAL '10 minutes'
+    AND ec.date_click >= es.date_sent
+WHERE es.date_sent >= NOW() - INTERVAL '7 days'
+GROUP BY email_type;
+
+
+
+
+1. users — таблиця з користувачами:
+    1. id — унікальний ідентифікатор користувача
+    2. email — поле з імейлом користувача (наприклад, «samuel.casey@gmail.com»)
+    3. id_country — унікальний ідентифікатор країни (відповідає countries.id )
+    4. date_reg — дата та час реєстрації користувача (наприклад, «2023-10-27 10:58:05»)
+2. emails_sent — таблиця надісланих листів у розсилці:
+    1. id — айді відправленого листа
+    2. id_user — користувач, якому надіслали листа (відповідає users.id)
+    3. id_type — тип листа
+    4. date_sent — дата та час відправлення листа
+3. emails_clicks — таблиця кліків по листах:
+    1. id — айді кліка по листу
+    2. id_email — айді листа, по якому був клік (відповідає emails_sent.id)
+    3. date_click — дата та час кліку по листу
+4. countries — таблиця країн:
+    1. id — ідентифікатор країни
+    2. name — назва країни (наприклад, «Mexico»)
+    3. group — до якої групи країн належить країна
