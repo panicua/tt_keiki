@@ -3,6 +3,7 @@ Test task solution for **Keiki**.
 
 ## Technologies:
 - Python 3.11+
+- SQL (PostgreSQL)
 - Jupyter Notebook
 - Matplotlib
 - Seaborn
@@ -11,8 +12,12 @@ Test task solution for **Keiki**.
 
 #### All the calculations for LTV per user and commentaries/conclusions were made in [calcs.ipynb](https://github.com/panicua/tt_keiki/blob/main/ltv_calculations.ipynb) file.
 
+## Task #1 - SQL queries:
+The source code with the SQL queries is available [>>> here](https://github.com/panicua/tt_keiki/tree/main/task_num_1/1st_TASK_KEIKI_SQL.txt).
+
+
 ## Task #3 - Metrics Visualization and Analysis:
-The source code with all the calculations and visualizations is available >>>[here](https://github.com/panicua/tt_keiki/tree/main/task_num_3/dashboard_calculations.ipynb).
+The source code with all the calculations and visualizations is available [>>> here](https://github.com/panicua/tt_keiki/tree/main/task_num_3/dashboard_calculations.ipynb).
 
 ### Visualizations and conclusions:
 ### ***Pie chart for total cost between Meta and Tiktok.
