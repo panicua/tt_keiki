@@ -5,6 +5,7 @@ Test task solution for **Keiki**.
 - Python 3.11+
 - SQL (PostgreSQL)
 - Jupyter Notebook
+- Tableau (Cloud)
 - Matplotlib
 - Seaborn
 - Pandas
