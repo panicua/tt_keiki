@@ -10,7 +10,7 @@ Test task solution for **Keiki**.
 - Pandas
 - Numpy
 
-#### All the calculations for LTV per user and commentaries/conclusions were made in [calcs.ipynb](https://github.com/panicua/tt_keiki/blob/main/ltv_calculations.ipynb) file.
+
 
 ## Task #1 - SQL queries:
 The source code with the SQL queries is available - [here](https://github.com/panicua/tt_keiki/tree/main/task_num_1/1st_TASK_KEIKI_SQL.txt).
